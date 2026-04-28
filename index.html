@@ -593,11 +593,11 @@
     <div class="container d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo">Auto</a>
       <div class="d-flex gap-4 d-none d-md-flex">
-        <a href="../home_page/Home.html" class="nav-link-item active">Home</a>
-        <a href="../service_page/Service.html" class="nav-link-item">Services</a>
-        <a href="../booking_page/Booking.html" class="nav-link-item">Booking</a>
-        <a href="../about_page/About.html" class="nav-link-item">About</a>
-        <a href="../contact_page/Contact.html" class="nav-link-item">Contact</a>
+        <a href="index.html" class="nav-link-item active">Home</a>
+        <a href="service_page/Service.html" class="nav-link-item">Services</a>
+        <a href="booking_page/Booking.html" class="nav-link-item">Booking</a>
+        <a href="about_page/About.html" class="nav-link-item">About</a>
+        <a href="contact_page/Contact.html" class="nav-link-item">Contact</a>
       </div>
       <div class="d-flex align-items-center gap-3">
         <div id="nav-auth"></div>
@@ -610,12 +610,12 @@
     </div>
   </nav>
    <div class="mobile-menu" id="mobile-menu">
-    <a href="../home_page/Home.html">Home</a>
-    <a href="../service_page/Service.html">Services</a>
-    <a href="../booking_page/Booking.html">Booking</a>
-    <a href="../about_page/About.html">About</a>
-    <a href="../contact_page/Contact.html">Contact</a>
-    <a href="../sos_page/SOS.html" style="color:var(--orange);">SOS Help</a>
+    <a href="index.html">Home</a>
+    <a href="service_page/Service.html">Services</a>
+    <a href="booking_page/Booking.html">Booking</a>
+    <a href="about_page/About.html">About</a>
+    <a href="contact_page/Contact.html">Contact</a>
+    <a href="sos_page/SOS.html" style="color:var(--orange);">SOS Help</a>
   </div>
 
   <!--Hero-->
@@ -629,8 +629,8 @@
           <h1>Your vehicle,<br><em>our responsibility</em></h1>
           <p>Book a mechanic, car wash, towing and more — or get emergency roadside help whenever you need it.</p>
           <div class="d-flex gap-3 flex-wrap">
-            <a href="../booking_page/Booking.html" class="btn-primary-auto">Book a service</a>
-            <a href="../sos_page/SOS.html" class="btn-secondary-auto">Get SOS help</a>
+            <a href="booking_page/Booking.html" class="btn-primary-auto">Book a service</a>
+            <a href="sos_page/SOS.html" class="btn-secondary-auto">Get SOS help</a>
           </div>
         </div>
         <div class="col-lg-6 hero-img-wrap d-flex justify-content-center">
@@ -773,8 +773,8 @@
       <h2>Ready to get started?</h2>
       <p>Book a service in under 2 minutes or get SOS help right now.</p>
       <div class="d-flex gap-3 justify-content-center flex-wrap">
-        <a href="../booking_page/Booking.html" class="btn-white">Book a service</a>
-        <a href="../sos_page/SOS.html" class="btn-secondary-auto" style="border-color:rgba(255,255,255,0.5);">Get SOS
+        <a href="booking_page/Booking.html" class="btn-white">Book a service</a>
+        <a href="sos_page/SOS.html" class="btn-secondary-auto" style="border-color:rgba(255,255,255,0.5);">Get SOS
           help</a>
       </div>
     </div>
@@ -785,15 +785,15 @@
     <div class="container">
       <div class="row g-4">
         <div class="col-6 col-md-3">
-          <h5>Auto</h5><a href="../home_page/Home.html">Home</a><a href="../services_page/Services.html">Services</a><a
-            href="../booking_page/Booking.html">Booking</a>
+          <h5>Auto</h5><a href="index.html">Home</a><a href="services_page/Services.html">Services</a><a
+            href="booking_page/Booking.html">Booking</a>
         </div>
         <div class="col-6 col-md-3">
-          <h5>Help</h5><a href="../sos_page/SOS.html">SOS Emergency</a><a href="../contact_page/Contact.html">Contact
+          <h5>Help</h5><a href="sos_page/SOS.html">SOS Emergency</a><a href="contact_page/Contact.html">Contact
             us</a><a href="#">FAQs</a>
         </div>
         <div class="col-6 col-md-3">
-          <h5>Company</h5><a href="../about_page/About.html">About Auto</a><a href="#">Privacy policy</a><a
+          <h5>Company</h5><a href="about_page/About.html">About Auto</a><a href="#">Privacy policy</a><a
             href="#">Terms</a>
         </div>
         <div class="col-6 col-md-3">
@@ -814,13 +814,13 @@
     wrap.innerHTML = `<span style="color:rgba(255,255,255,0.85);font-size:13px;font-weight:500;">Hi, ${user.name.split(' ')[0]}</span>
     <button onclick="logout()" style="background:none;border:none;color:rgba(255,255,255,0.5);font-size:12px;cursor:pointer;margin-left:8px;text-decoration:underline;">Logout</button>`;
   } else {
-    wrap.innerHTML = `<a href="../login_page/login.html" style="background:transparent;color:#fff;font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);">Log in</a>`;
+    wrap.innerHTML = `<a href="login_page/login.html" style="background:transparent;color:#fff;font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);">Log in</a>`;
   }
 }
 
 function logout() {
   localStorage.removeItem('auto_logged_in');
-  window.location.href = '../home_page/Home.html';
+  window.location.href = 'index.html';
 }
 updateNavAuth();
      function toggleMenu() {
