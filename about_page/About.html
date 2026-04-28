@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto — About Us</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Sora:wght@600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #1A2E4A;
+      --orange: #E55A2B;
+      --bg: #F5F6F8;
+      --white: #FFFFFF;
+      --border: #E4E6EA;
+      --text: #1A2E4A;
+      --muted: #6B7280;
+      --done: #E55A2B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+     body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .navbar-auto {
+      background: var(--navy);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--orange);
+    }
+
+    .nav-link-item {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link-item:hover,
+    .nav-link-item.active {
+      color: #fff;
+    }
+
+    .btn-sos-nav {
+      background: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .navbar-toggler-auto {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+      padding: 5px 8px;
+      cursor: pointer;
+    }
+
+    .navbar-toggler-auto span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: #fff;
+      margin: 3px 0;
+      border-radius: 2px;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: #162438;
+      padding: 12px 0;
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14px;
+      padding: 10px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      text-decoration: none;
+    }
+
+    .about-hero {
+      background: var(--navy);
+      padding: 60px 0 52px;
+    }
+
+    .about-hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    .about-hero h1 em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .about-hero p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 15px;
+      line-height: 1.75;
+      max-width: 520px;
+    }
+
+    .section {
+      padding: 60px 0;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .stats-section {
+      background: var(--white);
+      padding: 48px 0;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-family: 'Sora', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .stat-card span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .story-img {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .story-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .story-text h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    .story-text p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .val-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      height: 100%;
+      transition: transform 0.2s;
+    }
+
+    .val-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .val-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 16px;
+    }
+
+    .val-icon img {
+      width: 64px;
+      height: 64px;
+      object-fit: contain;
+    }
+
+    .val-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .val-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .team-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .team-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .team-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .team-card p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .cities-wrap {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .city-pill {
+      font-size: 13px;
+      padding: 5px 14px;
+      border-radius: 99px;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      background: var(--white);
+    }
+
+    .city-pill.soon {
+      background: var(--bg);
+      color: var(--muted);
+      border-style: dashed;
+    }
+
+    .cta-banner {
+      background: var(--orange);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .cta-banner h3 {
+      font-family: 'Sora', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .cta-banner p {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--orange);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: opacity 0.2s;
+    }
+
+    .btn-white:hover {
+      opacity: 0.9;
+      color: var(--orange);
+    }
+
+    footer {
+      background: var(--navy);
+      padding: 48px 0 20px;
+    }
+
+    footer h5 {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    footer a {
+      display: block;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+      text-decoration: none;
+      margin-bottom: 7px;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .foot-divider {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 24px 0 16px;
+    }
+
+    .foot-copy {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar-auto">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo">Auto</a>
+      <div class="d-flex gap-4 d-none d-md-flex">
+        <a href="../home_page/Home.html" class="nav-link-item">Home</a>
+        <a href="../service_page/Service.html" class="nav-link-item">Services</a>
+        <a href="../booking_page/Booking.html" class="nav-link-item">Booking</a>
+        <a href="../about_page/About.html" class="nav-link-item active">About</a>
+        <a href="../contact_page/Contact.html" class="nav-link-item">Contact</a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+         <div id="nav-auth"></div>
+        <a href="../sos_page/SOS.html" class="btn-sos-nav">SOS Help</a>
+        <button class="navbar-toggler-auto d-md-none"
+          onclick="toggleMenu()"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../home_page/Home.html">Home</a><a href="../service_page/Service.html">Services</a><a
+      href="../booking_page/Booking.html">Booking</a><a href="../about_page/About.html">About</a><a
+      href="../contact_page/Contact.html">Contact</a><a href="../sos_page/SOS.html" style="color:var(--orange);">SOS
+      Help</a>
+  </div>
+
+  <!--Brand story-->
+  <div class="about-hero">
+    <div class="container">
+      <div class="section-tag">Our story</div>
+      <h1>We built Auto because<br>getting help shouldn't <em>be hard</em></h1>
+      <p>Auto started as a simple idea — a single place to book vehicle services or get emergency help, without the
+        hassle of calling around. We believe that when your car breaks down, your phone should be the solution, not
+        another problem.</p>
+    </div>
+  </div>
+
+  <!--Stats strip-->
+  <div class="stats-section">
+    <div class="container">
+      <div class="row g-0">
+        <div class="col-4 fade-up">
+          <div class="stat-card" style="border-right:1px solid var(--border);"><strong><span class="stat-num"
+                data-target="10000">0</span>+</strong><span>Users helped</span></div>
+        </div>
+        <div class="col-4 fade-up">
+          <div class="stat-card" style="border-right:1px solid var(--border);"><strong><span class="stat-num"
+                data-target="5">0</span></strong><span>Cities in Kerala</span></div>
+        </div>
+        <div class="col-4 fade-up">
+          <div class="stat-card"><strong><span class="stat-num" data-target="500">0</span>+</strong><span>Service
+              partners</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--Team/value section-->
+  <section class="section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6 fade-up">
+          <div class="story-img">
+            <img src="./Team.jpg" alt="Auto team" />
+          </div>
+        </div>
+        <div class="col-lg-6 fade-up">
+          <div class="section-tag">How it started</div>
+          <h2 class="section-title">From one frustrating night to a full platform</h2>
+          <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:14px;">It started after a
+            late-night breakdown on a highway with no idea who to call. Searching through contacts, calling garages that
+            didn't pick up — that experience became the reason Auto exists.</p>
+          <p style="font-size:15px;color:var(--muted);line-height:1.75;margin-bottom:14px;">So nobody else has to go
+            through that same frustration. We partner with verified mechanics and service providers across Kerala to
+            make sure help is always close, always fast, and always trustworthy.</p>
+          <div class="section-tag" style="margin-top:20px;">Where we operate</div>
+          <div class="cities-wrap">
+            <span class="city-pill">Kochi</span><span class="city-pill">Thrissur</span><span
+              class="city-pill">Kozhikode</span><span class="city-pill">Thiruvananthapuram</span><span
+              class="city-pill">Kannur</span><span class="city-pill soon">+ more coming</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Values-->
+  <section class="section" style="background:var(--white);padding-top:56px;">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-tag">What we stand for</div>
+        <h2 class="section-title">Our values</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4 fade-up">
+          <div class="val-card">
+            <div class="val-icon"><img src="./value-speed.png" alt="Speed" /></div>
+            <h3>Speed</h3>
+            <p>We know that waiting is not an option when you need help urgently. Every process at Auto is built for
+              speed.</p>
+          </div>
+        </div>
+        <div class="col-md-4 fade-up">
+          <div class="val-card">
+            <div class="val-icon"><img src="./value-trust.png" alt="Trust" /></div>
+            <h3>Trust</h3>
+            <p>Every service partner on Auto is verified, rated, and reviewed by real users. You always know who is
+              coming.</p>
+          </div>
+        </div>
+        <div class="col-md-4 fade-up">
+          <div class="val-card">
+            <div class="val-icon"><img src="./value-simplicity.png" alt="Simplicity" /></div>
+            <h3>Simplicity</h3>
+            <p>No complicated steps. No unnecessary fields. Book in under 2 minutes and get help fast.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-tag">The people behind Auto</div>
+        <h2 class="section-title">Meet the team</h2>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-6 col-md-3 fade-up">
+          <div class="team-card">
+            <div class="team-avatar" style="background:#1A2E4A;">AK</div>
+            <h4>Arjun K.</h4>
+            <p>Founder & CEO</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 fade-up">
+          <div class="team-card">
+            <div class="team-avatar" style="background:#3B6D11;">PM</div>
+            <h4>Priya M.</h4>
+            <p>Design Lead</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 fade-up">
+          <div class="team-card">
+            <div class="team-avatar" style="background:#854F0B;">RJ</div>
+            <h4>Rahul J.</h4>
+            <p>Tech Lead</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3 fade-up">
+          <div class="team-card">
+            <div class="team-avatar" style="background:#534AB7;">SN</div>
+            <h4>Sneha N.</h4>
+            <p>Operations</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--CTA-->
+  <section class="section">
+    <div class="container">
+      <div class="cta-banner fade-up">
+        <div>
+          <h3>Ready to get started?</h3>
+          <p>Book a service or explore what Auto can do for you.</p>
+        </div>
+        <a href="../booking_page/Booking.html" class="btn-white">Book a service</a>
+      </div>
+    </div>
+  </section>
+
+  <!--Footer-->
+
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <h5>Auto</h5><a href="../home_page/Home.html">Home</a><a href="../services_page/Services.html">Services</a><a
+            href="../booking_page/Booking.html">Booking</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Help</h5><a href="../sos_page/SOS.html">SOS Emergency</a><a href="../contact_page/Contact.html">Contact
+            us</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Company</h5><a href="../about_page/About.html">About Auto</a><a href="#">Privacy policy</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Follow us</h5><a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+        </div>
+      </div>
+      <div class="foot-divider"></div>
+      <p class="foot-copy">© 2026 Auto. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+  <script>
+    // navbar auth 
+    function updateNavAuth() {
+  const loggedIn = localStorage.getItem('auto_logged_in');
+  const user = JSON.parse(localStorage.getItem('auto_user') || '{}');
+  const wrap = document.getElementById('nav-auth');
+  if (loggedIn && user.name) {
+    wrap.innerHTML = `<span style="color:rgba(255,255,255,0.85);font-size:13px;font-weight:500;">Hi, ${user.name.split(' ')[0]}</span>
+    <button onclick="logout()" style="background:none;border:none;color:rgba(255,255,255,0.5);font-size:12px;cursor:pointer;margin-left:8px;text-decoration:underline;">Logout</button>`;
+  } else {
+    wrap.innerHTML = `<a href="../login_page/login.html" style="background:transparent;color:#fff;font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);">Log in</a>`;
+  }
+}
+  
+function logout() {
+  localStorage.removeItem('auto_logged_in');
+  window.location.href = '../home_page/Home.html';
+}
+updateNavAuth();
+     function toggleMenu() {
+       document.getElementById('mobile-menu').classList.toggle('open'); 
+      }
+   
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { 
+        if (e.isIntersecting) e.target.classList.add('visible'); 
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+
+    const obs = new IntersectionObserver(e => e.forEach(x => {
+      if (x.isIntersecting) x.target.classList.add('visible');
+    }), { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    function animateCount(el) {
+      const target = parseInt(el.dataset.target), duration = 1600, step = target / (duration / 16);
+      let c = 0;
+      const t = setInterval(() => {
+        c += step; if (c >= target) {
+          el.textContent = target.toLocaleString(); clearInterval(t);
+        } else {
+          el.textContent = Math.floor(c).toLocaleString();
+        }
+      }, 16);
+    }
+
+    const sObs = new IntersectionObserver(e => {
+      e.forEach(x => {
+        if (x.isIntersecting) { animateCount(x.target); sObs.unobserve(x.target); }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.stat-num').forEach(el => sObs.observe(el));
+
+  </script>
+
+</body>
+
+</html>

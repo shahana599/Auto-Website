@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auto — Book a Service</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Sora:wght@600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --navy: #1A2E4A;
+            --orange: #E55A2B;
+            --bg: #F5F6F8;
+            --white: #FFFFFF;
+            --border: #E4E6EA;
+            --text: #1A2E4A;
+            --muted: #6B7280;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        .navbar-auto {
+            background: var(--navy);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Sora', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-link-item {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-link-item:hover,
+        .nav-link-item.active {
+            color: #fff;
+        }
+
+        .btn-sos-nav {
+            background: var(--orange);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 8px 18px;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .btn-login-nav {
+            background: transparent;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 7px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.2s;
+        }
+
+        .btn-login-nav:hover {
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .user-greeting {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .btn-logout {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 8px;
+            text-decoration: underline;
+        }
+
+        .navbar-toggler-auto {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+
+        .navbar-toggler-auto span {
+            display: block;
+            width: 18px;
+            height: 2px;
+            background: #fff;
+            margin: 3px 0;
+            border-radius: 2px;
+        }
+
+        .mobile-menu {
+            display: none;
+            background: #162438;
+            padding: 12px 0;
+        }
+
+        .mobile-menu.open {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 14px;
+            padding: 10px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            text-decoration: none;
+        }
+
+        .page-header {
+            background: var(--navy);
+            padding: 36px 0 28px;
+        }
+
+        .page-header h1 {
+            font-family: 'Sora', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+
+        .page-header p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .progress-wrap {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 20px 0;
+        }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .step-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .step-item.active .step-circle {
+            background: var(--navy);
+            color: #fff;
+            border-color: var(--navy);
+        }
+
+        .step-item.done .step-circle {
+            background: var(--orange);
+            color: #fff;
+            border-color: var(--orange);
+        }
+
+        .step-label {
+            font-size: 10px;
+            color: var(--muted);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .step-item.active .step-label {
+            color: var(--navy);
+            font-weight: 600;
+        }
+
+        .step-item.done .step-label {
+            color: var(--orange);
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+            min-width: 28px;
+            margin-bottom: 18px;
+            transition: background 0.3s;
+        }
+
+        .step-line.done {
+            background: var(--orange);
+        }
+
+        .booking-main {
+            padding: 32px 0 60px;
+        }
+
+        .step-panel {
+            display: none;
+            animation: fadeUp 0.3s ease;
+        }
+
+        .step-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .panel-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .panel-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 6px;
+        }
+
+        .panel-sub {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 24px;
+        }
+
+        .section-lbl {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .service-card {
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: all 0.2s;
+            background: var(--white);
+        }
+
+        .service-card:hover {
+            border-color: #b5c4d8;
+        }
+
+        .service-card.selected {
+            border-color: var(--orange);
+            background: rgba(229, 90, 43, 0.04);
+        }
+
+        .s-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .s-icon img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+        }
+
+        .s-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 2px;
+        }
+
+        .s-info p {
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .s-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            margin-left: auto;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .service-card.selected .s-check {
+            background: var(--orange);
+            border-color: var(--orange);
+        }
+
+        .service-card.selected .s-check::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        /* MECHANIC CARDS */
+        .mechanic-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .mechanic-card {
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 18px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: var(--white);
+            position: relative;
+        }
+
+        .mechanic-card:hover {
+            border-color: #b5c4d8;
+            transform: translateY(-2px);
+        }
+
+        .mechanic-card.selected {
+            border-color: var(--orange);
+            background: rgba(229, 90, 43, 0.03);
+        }
+
+        .mechanic-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .mechanic-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .mechanic-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 2px;
+        }
+
+        .mechanic-exp {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .stars-row {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .star {
+            width: 12px;
+            height: 12px;
+            background: var(--orange);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .star.half {
+            background: linear-gradient(90deg, var(--orange) 50%, var(--border) 50%);
+        }
+
+        .rating-num {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .rating-count {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .skill-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .skill-tag {
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background: var(--bg);
+            color: var(--muted);
+            border: 0.5px solid var(--border);
+        }
+
+        .avail-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .avail-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+        }
+
+        .avail-dot.green {
+            background: #639922;
+        }
+
+        .avail-dot.orange {
+            background: #EF9F27;
+        }
+
+        .mechanic-check {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .mechanic-card.selected .mechanic-check {
+            background: var(--orange);
+            border-color: var(--orange);
+        }
+
+        .mechanic-card.selected .mechanic-check::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #fff;
+        }
+
+        .top-badge {
+            position: absolute;
+            top: -1px;
+            left: 14px;
+            background: var(--navy);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 0 0 6px 6px;
+        }
+
+        .calendar-wrap {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .cal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+
+        .cal-header span {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .cal-nav {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            color: var(--navy);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cal-nav:hover {
+            background: var(--border);
+        }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .cal-day-name {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--muted);
+            padding: 4px 0;
+        }
+
+        .cal-day {
+            text-align: center;
+            font-size: 13px;
+            padding: 8px 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text);
+            transition: all 0.2s;
+        }
+
+        .cal-day:hover:not(.empty):not(.past) {
+            background: var(--border);
+        }
+
+        .cal-day.today {
+            color: var(--orange);
+            font-weight: 600;
+        }
+
+        .cal-day.selected {
+            background: var(--navy);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .cal-day.past {
+            color: #ccc;
+            cursor: default;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .time-slot {
+            padding: 10px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s;
+            background: var(--white);
+        }
+
+        .time-slot:hover {
+            border-color: var(--navy);
+            color: var(--navy);
+        }
+
+        .time-slot.selected {
+            border-color: var(--orange);
+            background: rgba(229, 90, 43, 0.06);
+            color: var(--orange);
+            font-weight: 600;
+        }
+
+        .time-slot.unavailable {
+            opacity: 0.4;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .form-label-auto {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .form-control-auto {
+            width: 100%;
+            height: 44px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 0 14px;
+            font-size: 14px;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--white);
+            transition: border-color 0.2s;
+            outline: none;
+        }
+
+        .form-control-auto:focus {
+            border-color: var(--navy);
+        }
+
+        .form-control-auto::placeholder {
+            color: #b0b5bc;
+        }
+
+        select.form-control-auto {
+            cursor: pointer;
+        }
+
+        .confirm-table {
+            background: var(--bg);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .confirm-row-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .confirm-row-item:last-child {
+            border-bottom: none;
+        }
+
+        .confirm-lbl {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .confirm-val {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .mechanic-confirm {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .success-wrap {
+            display: none;
+            text-align: center;
+            padding: 48px 20px;
+            animation: fadeUp 0.4s ease;
+        }
+
+        .success-wrap.show {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(99, 153, 34, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .btn-primary-auto {
+            background: var(--navy);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .btn-primary-auto:hover {
+            background: #243f66;
+        }
+
+        .btn-orange-auto {
+            background: var(--orange);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: background 0.2s;
+            width: 100%;
+        }
+
+        .btn-orange-auto:hover {
+            background: #cc4e22;
+        }
+
+        .btn-back-auto {
+            background: transparent;
+            color: var(--muted);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: 1.5px solid var(--border);
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .btn-back-auto:hover {
+            border-color: var(--navy);
+            color: var(--navy);
+        }
+
+        .booking-summary {
+            background: var(--navy);
+            border-radius: 14px;
+            padding: 20px;
+            position: sticky;
+            top: 90px;
+        }
+
+        .booking-summary h5 {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.07em;
+            margin-bottom: 14px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-lbl {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .summary-val {
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            text-align: right;
+            max-width: 140px;
+        }
+
+        .summary-price {
+            background: rgba(229, 90, 43, 0.2);
+            border: 1px solid rgba(229, 90, 43, 0.4);
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin-top: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .summary-price span {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .summary-price strong {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--orange);
+        }
+
+        footer {
+            background: var(--navy);
+            padding: 48px 0 20px;
+        }
+
+        footer h5 {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 14px;
+        }
+
+        footer a {
+            display: block;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            text-decoration: none;
+            margin-bottom: 7px;
+            transition: color 0.2s;
+        }
+
+        footer a:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .foot-divider {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 24px 0 16px;
+        }
+
+        .foot-copy {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+        }
+
+        @media(max-width:576px) {
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mechanic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .time-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .step-label {
+                font-size: 9px;
+            }
+
+            .step-line {
+                min-width: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar-auto">
+        <div class="container d-flex align-items-center justify-content-between">
+            <a href="../home_page/Home.html" class="logo">Auto</a>
+            <div class="d-none d-md-flex gap-4 align-items-center">
+                <a href="../home_page/Home.html" class="nav-link-item">Home</a>
+                <a href="../service_page/Service.html" class="nav-link-item">Services</a>
+                <a href="../booking_page/Booking.html" class="nav-link-item active">Booking</a>
+                <a href="../about_page/About.html" class="nav-link-item">About</a>
+                <a href="../contact_page/Contact.html" class="nav-link-item">Contact</a>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div id="nav-auth"></div>
+                <a href="../sos_page/SOS.html" class="btn-sos-nav">SOS Help</a>
+                <button class="navbar-toggler-auto d-md-none"
+                    onclick="toggleMenu()"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </nav>
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="../home_page/Home.html">Home</a><a href="../service_page/Service.html">Services</a><a href="../booking_page/Booking.html">Booking</a><a
+            href="../about_page/About.html">About</a><a href="../contact_page/Contact.html">Contact</a><a href="../sos_page/SOS.html"
+            style="color:var(--orange);">SOS Help</a>
+    </div>
+
+    <div class="page-header">
+        <div class="container">
+            <h1>Book a service</h1>
+            <p>Pick your service, choose a mechanic, and we come to you.</p>
+        </div>
+    </div>
+
+    <div class="progress-wrap">
+        <div class="progress-steps">
+            <div class="step-item active" id="si-1">
+                <div class="step-circle">1</div><span class="step-label">Service</span>
+            </div>
+            <div class="step-line" id="sl-1"></div>
+            <div class="step-item" id="si-2">
+                <div class="step-circle">2</div><span class="step-label">Mechanic</span>
+            </div>
+            <div class="step-line" id="sl-2"></div>
+            <div class="step-item" id="si-3">
+                <div class="step-circle">3</div><span class="step-label">Date & Time</span>
+            </div>
+            <div class="step-line" id="sl-3"></div>
+            <div class="step-item" id="si-4">
+                <div class="step-circle">4</div><span class="step-label">Details</span>
+            </div>
+            <div class="step-line" id="sl-4"></div>
+            <div class="step-item" id="si-5">
+                <div class="step-circle">5</div><span class="step-label">Confirm</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="booking-main">
+        <div class="container">
+            <div class="row justify-content-center g-4">
+                <div class="col-lg-7 col-md-9">
+
+                    <div class="success-wrap" id="success-screen">
+                        <div class="panel-card">
+                            <div class="success-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none"
+                                    stroke="#639922" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg></div>
+                            <h2
+                                style="font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:8px;">
+                                Booking confirmed!</h2>
+                            <p id="success-msg"
+                                style="font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6;"></p>
+                            <a href="../home_page/Home.html" class="btn-primary-auto"
+                                style="display:inline-block;width:auto;text-decoration:none;padding:12px 36px;">Back to
+                                Home</a>
+                        </div>
+                    </div>
+
+                    <!-- STEP 1 — SERVICE -->
+                    <div class="step-panel active" id="step-1">
+                        <div class="panel-card">
+                            <div class="section-lbl">Step 1 of 5</div>
+                            <h2 class="panel-title">What service do you need?</h2>
+                            <p class="panel-sub">Select one service to continue.</p>
+                            <div class="service-grid">
+                                <div class="service-card" onclick="selectService(this,'Mechanic visit','₹299')">
+                                    <div class="s-icon"><img src="mechanic.png" alt="Mechanic" /></div>
+                                    <div class="s-info">
+                                        <h4>Mechanic visit</h4>
+                                        <p>On-site repair & diagnosis</p>
+                                    </div>
+                                    <div class="s-check"></div>
+                                </div>
+                                <div class="service-card" onclick="selectService(this,'Car wash','₹149')">
+                                    <div class="s-icon"><img src="carwash.png" alt="Car wash" /></div>
+                                    <div class="s-info">
+                                        <h4>Car wash</h4>
+                                        <p>Interior & exterior clean</p>
+                                    </div>
+                                    <div class="s-check"></div>
+                                </div>
+                                <div class="service-card" onclick="selectService(this,'Tyre change','₹249')">
+                                    <div class="s-icon"><img src="tyre.png" alt="Tyre" /></div>
+                                    <div class="s-info">
+                                        <h4>Tyre change</h4>
+                                        <p>Flat or worn tyre replacement</p>
+                                    </div>
+                                    <div class="s-check"></div>
+                                </div>
+                                <div class="service-card" onclick="selectService(this,'Towing','₹499')">
+                                    <div class="s-icon"><img src="towing.png" alt="Towing" /></div>
+                                    <div class="s-info">
+                                        <h4>Towing</h4>
+                                        <p>Safe vehicle towing</p>
+                                    </div>
+                                    <div class="s-check"></div>
+                                </div>
+                                <div class="service-card" onclick="selectService(this,'Battery jump-start','₹199')">
+                                    <div class="s-icon"><img src="battery.png" alt="Battery" /></div>
+                                    <div class="s-info">
+                                        <h4>Battery jump-start</h4>
+                                        <p>Dead battery assistance</p>
+                                    </div>
+                                    <div class="s-check"></div>
+                                </div>
+                                <div class="service-card" onclick="selectService(this,'Full service package','₹599')">
+                                    <div class="s-icon"><img src="fullservice.png" alt="Full service" />
+                                    </div>
+                                    <div class="s-info">
+                                        <h4>Full service package</h4>
+                                        <p>Wash, check-up & oil change</p>
+                                    </div>
+                                    <div class="s-check"></div>
+                                </div>
+                            </div>
+                            <div class="mt-4"><button class="btn-primary-auto" onclick="nextStep(1)">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2 — MECHANIC -->
+                    <div class="step-panel" id="step-2">
+                        <div class="panel-card">
+                            <div class="section-lbl">Step 2 of 5</div>
+                            <h2 class="panel-title">Choose your mechanic</h2>
+                            <p class="panel-sub">Pick someone you're comfortable with. All mechanics are verified.</p>
+                            <div class="mechanic-grid">
+
+                                <div class="mechanic-card"
+                                    onclick="selectMechanic(this,'Arjun Kumar','⭐ 4.9','AK','#1A2E4A')">
+                                    <div class="top-badge">Top rated</div>
+                                    <div class="mechanic-check"></div>
+                                    <div class="mechanic-top">
+                                        <div class="mechanic-avatar" style="background:#1A2E4A;">AK</div>
+                                        <div>
+                                            <div class="mechanic-name">Arjun Kumar</div>
+                                            <div class="mechanic-exp">8 years experience</div>
+                                        </div>
+                                    </div>
+                                    <div class="stars-row">
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <span class="rating-num">4.9</span><span class="rating-count">(214
+                                            reviews)</span>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">Engine repair</span>
+                                        <span class="skill-tag">Diagnostics</span>
+                                        <span class="skill-tag">Electrical</span>
+                                    </div>
+                                    <div class="avail-badge">
+                                        <div class="avail-dot green"></div><span
+                                            style="font-size:11px;color:#3B6D11;font-weight:500;">Available today</span>
+                                    </div>
+                                </div>
+
+                                <div class="mechanic-card"
+                                    onclick="selectMechanic(this,'Priya Nair','⭐ 4.7','PN','#3B6D11')">
+                                    <div class="mechanic-check"></div>
+                                    <div class="mechanic-top">
+                                        <div class="mechanic-avatar" style="background:#3B6D11;">PN</div>
+                                        <div>
+                                            <div class="mechanic-name">Priya Nair</div>
+                                            <div class="mechanic-exp">5 years experience</div>
+                                        </div>
+                                    </div>
+                                    <div class="stars-row">
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <span class="rating-num">4.7</span><span class="rating-count">(138
+                                            reviews)</span>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">Oil change</span>
+                                        <span class="skill-tag">Tyre service</span>
+                                        <span class="skill-tag">AC repair</span>
+                                    </div>
+                                    <div class="avail-badge">
+                                        <div class="avail-dot green"></div><span
+                                            style="font-size:11px;color:#3B6D11;font-weight:500;">Available today</span>
+                                    </div>
+                                </div>
+
+                                <div class="mechanic-card"
+                                    onclick="selectMechanic(this,'Rahul Jose','⭐ 4.6','RJ','#854F0B')">
+                                    <div class="mechanic-check"></div>
+                                    <div class="mechanic-top">
+                                        <div class="mechanic-avatar" style="background:#854F0B;">RJ</div>
+                                        <div>
+                                            <div class="mechanic-name">Rahul Jose</div>
+                                            <div class="mechanic-exp">6 years experience</div>
+                                        </div>
+                                    </div>
+                                    <div class="stars-row">
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <span class="rating-num">4.6</span><span class="rating-count">(97
+                                            reviews)</span>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">Body work</span>
+                                        <span class="skill-tag">Brakes</span>
+                                        <span class="skill-tag">Suspension</span>
+                                    </div>
+                                    <div class="avail-badge">
+                                        <div class="avail-dot orange"></div><span
+                                            style="font-size:11px;color:#854F0B;font-weight:500;">Available
+                                            tomorrow</span>
+                                    </div>
+                                </div>
+
+                                <div class="mechanic-card"
+                                    onclick="selectMechanic(this,'Sneha Raj','⭐ 4.8','SR','#534AB7')">
+                                    <div class="mechanic-check"></div>
+                                    <div class="mechanic-top">
+                                        <div class="mechanic-avatar" style="background:#534AB7;">SR</div>
+                                        <div>
+                                            <div class="mechanic-name">Sneha Raj</div>
+                                            <div class="mechanic-exp">4 years experience</div>
+                                        </div>
+                                    </div>
+                                    <div class="stars-row">
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <div class="star"></div>
+                                        <span class="rating-num">4.8</span><span class="rating-count">(162
+                                            reviews)</span>
+                                    </div>
+                                    <div class="skill-tags">
+                                        <span class="skill-tag">Full service</span>
+                                        <span class="skill-tag">Car wash</span>
+                                        <span class="skill-tag">Inspection</span>
+                                    </div>
+                                    <div class="avail-badge">
+                                        <div class="avail-dot green"></div><span
+                                            style="font-size:11px;color:#3B6D11;font-weight:500;">Available today</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="d-flex gap-3 mt-4"><button class="btn-back-auto" onclick="prevStep(2)">←
+                                    Back</button><button class="btn-primary-auto"
+                                    onclick="nextStep(2)">Continue</button></div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3 — DATE & TIME -->
+                    <div class="step-panel" id="step-3">
+                        <div class="panel-card">
+                            <div class="section-lbl">Step 3 of 5</div>
+                            <h2 class="panel-title">Pick a date and time</h2>
+                            <p class="panel-sub">Choose when you'd like us to come.</p>
+                            <div class="row g-3">
+                                <div class="col-md-7">
+                                    <div class="section-lbl mb-2">Choose a date</div>
+                                    <div class="calendar-wrap">
+                                        <div class="cal-header"><button class="cal-nav"
+                                                onclick="changeMonth(-1)">‹</button><span
+                                                id="cal-month-label"></span><button class="cal-nav"
+                                                onclick="changeMonth(1)">›</button></div>
+                                        <div class="cal-grid" id="cal-grid">
+                                            <div class="cal-day-name">Su</div>
+                                            <div class="cal-day-name">Mo</div>
+                                            <div class="cal-day-name">Tu</div>
+                                            <div class="cal-day-name">We</div>
+                                            <div class="cal-day-name">Th</div>
+                                            <div class="cal-day-name">Fr</div>
+                                            <div class="cal-day-name">Sa</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="section-lbl mb-2">Choose a time</div>
+                                    <div class="time-grid">
+                                        <div class="time-slot" onclick="selectTime(this,'9:00 AM')">9:00 AM</div>
+                                        <div class="time-slot" onclick="selectTime(this,'10:00 AM')">10:00 AM</div>
+                                        <div class="time-slot" onclick="selectTime(this,'11:00 AM')">11:00 AM</div>
+                                        <div class="time-slot unavailable">12:00 PM</div>
+                                        <div class="time-slot" onclick="selectTime(this,'2:00 PM')">2:00 PM</div>
+                                        <div class="time-slot" onclick="selectTime(this,'3:00 PM')">3:00 PM</div>
+                                        <div class="time-slot" onclick="selectTime(this,'4:00 PM')">4:00 PM</div>
+                                        <div class="time-slot unavailable">5:00 PM</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3 mt-4"><button class="btn-back-auto" onclick="prevStep(3)">←
+                                    Back</button><button class="btn-primary-auto"
+                                    onclick="nextStep(3)">Continue</button></div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 4 — DETAILS -->
+                    <div class="step-panel" id="step-4">
+                        <div class="panel-card">
+                            <div class="section-lbl">Step 4 of 5</div>
+                            <h2 class="panel-title">Your details</h2>
+                            <p class="panel-sub">Just the basics — we'll handle the rest.</p>
+                            <div class="row g-3">
+                                <div class="col-sm-6"><label class="form-label-auto">Your name</label><input type="text"
+                                        class="form-control-auto" id="inp-name" placeholder="e.g. Rahul Menon" /></div>
+                                <div class="col-sm-6"><label class="form-label-auto">Phone number</label><input
+                                        type="tel" class="form-control-auto" id="inp-phone"
+                                        placeholder="e.g. 9876543210" /></div>
+                                <div class="col-12"><label class="form-label-auto">Your address / location</label><input
+                                        type="text" class="form-control-auto" id="inp-address"
+                                        placeholder="e.g. MG Road, Ernakulam, Kochi" /></div>
+                                <div class="col-sm-6"><label class="form-label-auto">Vehicle type</label><select
+                                        class="form-control-auto" id="inp-vehicle">
+                                        <option value="">Select vehicle type</option>
+                                        <option>Car</option>
+                                        <option>Bike / Motorcycle</option>
+                                        <option>SUV</option>
+                                        <option>Auto rickshaw</option>
+                                        <option>Van / Minivan</option>
+                                        <option>Truck</option>
+                                    </select></div>
+                                <div class="col-sm-6"><label class="form-label-auto">Number plate</label><input
+                                        type="text" class="form-control-auto" id="inp-plate"
+                                        placeholder="e.g. KL 07 AB 1234" /></div>
+                            </div>
+                            <div class="d-flex gap-3 mt-4"><button class="btn-back-auto" onclick="prevStep(4)">←
+                                    Back</button><button class="btn-primary-auto"
+                                    onclick="nextStep(4)">Continue</button></div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 5 — CONFIRM -->
+                    <div class="step-panel" id="step-5">
+                        <div class="panel-card">
+                            <div class="section-lbl">Step 5 of 5</div>
+                            <h2 class="panel-title">Review your booking</h2>
+                            <p class="panel-sub">Everything look good? Hit confirm to book.</p>
+                            <div class="confirm-table mb-4">
+                                <div class="confirm-row-item"><span class="confirm-lbl">Service</span><span
+                                        class="confirm-val" id="conf-service">—</span></div>
+                                <div class="confirm-row-item"><span class="confirm-lbl">Mechanic</span>
+                                    <div class="mechanic-confirm">
+                                        <div id="conf-mech-avatar"
+                                            style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;flex-shrink:0;">
+                                        </div>
+                                        <span class="confirm-val" id="conf-mechanic">—</span>
+                                    </div>
+                                </div>
+                                <div class="confirm-row-item"><span class="confirm-lbl">Date</span><span
+                                        class="confirm-val" id="conf-date">—</span></div>
+                                <div class="confirm-row-item"><span class="confirm-lbl">Time</span><span
+                                        class="confirm-val" id="conf-time">—</span></div>
+                                <div class="confirm-row-item"><span class="confirm-lbl">Name</span><span
+                                        class="confirm-val" id="conf-name">—</span></div>
+                                <div class="confirm-row-item"><span class="confirm-lbl">Phone</span><span
+                                        class="confirm-val" id="conf-phone">—</span></div>
+                                <div class="confirm-row-item"><span class="confirm-lbl">Location</span><span
+                                        class="confirm-val" id="conf-address">—</span></div>
+                                <div class="confirm-row-item"><span class="confirm-lbl">Vehicle</span><span
+                                        class="confirm-val" id="conf-vehicle">—</span></div>
+                                <div class="confirm-row-item"><span class="confirm-lbl">Number plate</span><span
+                                        class="confirm-val" id="conf-plate">—</span></div>
+                            </div>
+                            <div class="d-flex gap-3"><button class="btn-back-auto" onclick="prevStep(5)">←
+                                    Back</button><button class="btn-orange-auto" onclick="confirmBooking()">Confirm
+                                    booking</button></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SUMMARY SIDEBAR -->
+                <div class="col-lg-3 d-none d-lg-block">
+                    <div class="booking-summary">
+                        <h5>Your booking</h5>
+                        <div class="summary-row"><span class="summary-lbl">Service</span><span class="summary-val"
+                                id="sum-service">Not selected</span></div>
+                        <div class="summary-row"><span class="summary-lbl">Mechanic</span><span class="summary-val"
+                                id="sum-mechanic">Not selected</span></div>
+                        <div class="summary-row"><span class="summary-lbl">Date</span><span class="summary-val"
+                                id="sum-date">Not selected</span></div>
+                        <div class="summary-row"><span class="summary-lbl">Time</span><span class="summary-val"
+                                id="sum-time">Not selected</span></div>
+                        <div class="summary-row"><span class="summary-lbl">Location</span><span class="summary-val"
+                                id="sum-location">Not entered</span></div>
+                        <div class="summary-price"><span>Estimated price</span><strong id="sum-price">—</strong></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-6 col-md-3">
+                    <h5>Auto</h5><a href="index.html">Home</a><a href="services.html">Services</a><a
+                        href="booking.html">Booking</a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h5>Help</h5><a href="sos.html">SOS Emergency</a><a href="contact.html">Contact us</a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h5>Company</h5><a href="about.html">About Auto</a><a href="#">Privacy policy</a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h5>Follow us</h5><a href="#">Instagram</a><a href="#">Twitter / X</a>
+                </div>
+            </div>
+            <div class="foot-divider"></div>
+            <p class="foot-copy">© 2025 Auto. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+
+    function updateNavAuth() {
+  const loggedIn = localStorage.getItem('auto_logged_in');
+  const user = JSON.parse(localStorage.getItem('auto_user') || '{}');
+  const wrap = document.getElementById('nav-auth');
+  if (loggedIn && user.name) {
+    wrap.innerHTML = `<span style="color:rgba(255,255,255,0.85);font-size:13px;font-weight:500;">Hi, ${user.name.split(' ')[0]}</span>
+    <button onclick="logout()" style="background:none;border:none;color:rgba(255,255,255,0.5);font-size:12px;cursor:pointer;margin-left:8px;text-decoration:underline;">Logout</button>`;
+  } else {
+    wrap.innerHTML = `<a href="../login_page/login.html" style="background:transparent;color:#fff;font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);">Log in</a>`;
+  }
+}
+  
+function logout() {
+  localStorage.removeItem('auto_logged_in');
+  window.location.href = '../home_page/Home.html';
+}
+updateNavAuth();
+     function toggleMenu() {
+       document.getElementById('mobile-menu').classList.toggle('open'); 
+      }
+
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        let calDate = new Date(), currentStep = 1;
+        let booking = { service: '', price: '', mechanic: '', mechanicColor: '', mechanicInitials: '', date: '', time: '', name: '', phone: '', address: '', vehicle: '', plate: '' };
+
+        function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open'); }
+
+
+        function updateSummary() {
+            document.getElementById('sum-service').textContent = booking.service || 'Not selected';
+            document.getElementById('sum-mechanic').textContent = booking.mechanic || 'Not selected';
+            document.getElementById('sum-date').textContent = booking.date || 'Not selected';
+            document.getElementById('sum-time').textContent = booking.time || 'Not selected';
+            document.getElementById('sum-location').textContent = booking.address || 'Not entered';
+            document.getElementById('sum-price').textContent = booking.price || '—';
+        }
+
+        function updateProgress(step) {
+            for (let i = 1; i <= 5; i++) { const si = document.getElementById('si-' + i); si.classList.remove('active', 'done'); if (i === step) si.classList.add('active'); if (i < step) si.classList.add('done'); }
+            for (let i = 1; i <= 4; i++) { document.getElementById('sl-' + i).classList.toggle('done', i < step); }
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+            const panel = document.getElementById('step-' + step);
+            if (panel) panel.classList.add('active');
+            updateProgress(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextStep(from) {
+            if (from === 1) { if (!booking.service) { alert('Please select a service.'); return; } }
+            if (from === 2) { if (!booking.mechanic) { alert('Please choose a mechanic.'); return; } }
+            if (from === 3) { if (!booking.date) { alert('Please select a date.'); return; } if (!booking.time) { alert('Please select a time slot.'); return; } }
+            if (from === 4) {
+                booking.name = document.getElementById('inp-name').value.trim();
+                booking.phone = document.getElementById('inp-phone').value.trim();
+                booking.address = document.getElementById('inp-address').value.trim();
+                booking.vehicle = document.getElementById('inp-vehicle').value;
+                booking.plate = document.getElementById('inp-plate').value.trim();
+                if (!booking.name) { alert('Please enter your name.'); return; }
+                if (!booking.phone) { alert('Please enter your phone number.'); return; }
+                if (!booking.address) { alert('Please enter your location.'); return; }
+                if (!booking.vehicle) { alert('Please select your vehicle type.'); return; }
+                populateConfirm();
+                updateSummary();
+            }
+            currentStep = from + 1;
+            showStep(currentStep);
+        }
+
+        function prevStep(from) { currentStep = from - 1; showStep(currentStep); }
+
+        function selectService(card, name, price) {
+            document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            booking.service = name; booking.price = price;
+            updateSummary();
+        }
+
+        function selectMechanic(card, name, rating, initials, color) {
+            document.querySelectorAll('.mechanic-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            booking.mechanic = name;
+            booking.mechanicColor = color;
+            booking.mechanicInitials = initials;
+            updateSummary();
+        }
+
+        function renderCalendar() {
+            const year = calDate.getFullYear(), month = calDate.getMonth(), today = new Date();
+            document.getElementById('cal-month-label').textContent = monthNames[month] + ' ' + year;
+            const grid = document.getElementById('cal-grid');
+            const dayNames = Array.from(grid.querySelectorAll('.cal-day-name'));
+            grid.innerHTML = '';
+            dayNames.forEach(d => grid.appendChild(d.cloneNode(true)));
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            for (let i = 0; i < firstDay; i++) { const e = document.createElement('div'); e.className = 'cal-day empty'; grid.appendChild(e); }
+            for (let d = 1; d <= daysInMonth; d++) {
+                const div = document.createElement('div'); div.className = 'cal-day'; div.textContent = d;
+                const thisDate = new Date(year, month, d);
+                const isPast = thisDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) div.classList.add('today');
+                if (isPast) { div.classList.add('past'); }
+                else { div.addEventListener('click', () => selectDate(div, d, month, year)); }
+                if (booking.date === d + ' ' + monthNames[month] + ' ' + year) div.classList.add('selected');
+                grid.appendChild(div);
+            }
+        }
+
+        function selectDate(el, d, month, year) {
+            document.querySelectorAll('.cal-day').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+            booking.date = d + ' ' + monthNames[month] + ' ' + year;
+            updateSummary();
+        }
+
+        function changeMonth(dir) { calDate.setMonth(calDate.getMonth() + dir); renderCalendar(); }
+
+        function selectTime(el, time) {
+            document.querySelectorAll('.time-slot:not(.unavailable)').forEach(t => t.classList.remove('selected'));
+            el.classList.add('selected'); booking.time = time;
+            updateSummary();
+        }
+
+        function populateConfirm() {
+            document.getElementById('conf-service').textContent = booking.service || '—';
+            const avatar = document.getElementById('conf-mech-avatar');
+            avatar.textContent = booking.mechanicInitials || '';
+            avatar.style.background = booking.mechanicColor || '#1A2E4A';
+            document.getElementById('conf-mechanic').textContent = booking.mechanic || '—';
+            document.getElementById('conf-date').textContent = booking.date || '—';
+            document.getElementById('conf-time').textContent = booking.time || '—';
+            document.getElementById('conf-name').textContent = booking.name || '—';
+            document.getElementById('conf-phone').textContent = booking.phone || '—';
+            document.getElementById('conf-address').textContent = booking.address || '—';
+            document.getElementById('conf-vehicle').textContent = booking.vehicle || '—';
+            document.getElementById('conf-plate').textContent = booking.plate || '—';
+        }
+
+        function confirmBooking() {
+            document.querySelectorAll('.step-panel').forEach(p => p.style.display = 'none');
+            document.getElementById('success-screen').classList.add('show');
+            document.getElementById('success-msg').textContent = 'We\'ve confirmed your ' + booking.service + ' with ' + booking.mechanic + ' on ' + booking.date + ' at ' + booking.time + '. Our team will reach ' + booking.address + ' on time.';
+            updateProgress(6);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        renderCalendar();
+        updateNavAuth();
+    </script>
+</body>
+
+</html>

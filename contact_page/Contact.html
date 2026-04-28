@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Auto — Contact Us</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Sora:wght@600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #1A2E4A;
+      --orange: #E55A2B;
+      --bg: #F5F6F8;
+      --white: #FFFFFF;
+      --border: #E4E6EA;
+      --text: #1A2E4A;
+      --muted: #6B7280;
+      --done: #E55A2B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .navbar-auto {
+      background: var(--navy);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-link-item {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link-item:hover,
+    .nav-link-item.active {
+      color: #fff;
+    }
+
+    .btn-sos-nav {
+      background: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .navbar-toggler-auto {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+      padding: 5px 8px;
+      cursor: pointer;
+    }
+
+    .navbar-toggler-auto span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: #fff;
+      margin: 3px 0;
+      border-radius: 2px;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: #162438;
+      padding: 12px 0;
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14px;
+      padding: 10px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      text-decoration: none;
+    }
+
+    .page-header {
+      background: var(--navy);
+      padding: 40px 0 32px;
+    }
+
+    .page-header h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .page-header p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 52px 0 64px;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(99, 153, 34, 0.1);
+      border: 1px solid rgba(99, 153, 34, 0.3);
+      border-radius: 99px;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #639922;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.4;
+      }
+    }
+
+    .status-badge span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #3B6D11;
+    }
+
+    .panel-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .panel-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .panel-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .form-label-auto {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-control-auto {
+      width: 100%;
+      height: 44px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-control-auto:focus {
+      border-color: var(--navy);
+    }
+
+    .form-control-auto::placeholder {
+      color: #b0b5bc;
+    }
+
+    textarea.form-control-auto {
+      height: 110px;
+      padding: 12px 14px;
+      resize: none;
+    }
+
+    .btn-send {
+      background: var(--navy);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s;
+    }
+
+    .btn-send:hover {
+      background: #243f66;
+    }
+
+    .error-message {
+      font-size: 12px;
+      color: #dc3545;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .info-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 14px;
+    }
+
+    .info-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .info-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .info-row span,
+    .info-row a {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+      text-decoration: none;
+    }
+
+    .info-row a:hover {
+      color: var(--orange);
+    }
+
+    .quick-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .quick-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .quick-btn:hover {
+      border-color: var(--navy);
+      background: var(--bg);
+    }
+
+    .quick-btn-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .quick-btn span {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .quick-btn small {
+      font-size: 11px;
+      color: var(--muted);
+      display: block;
+    }
+
+    .map-box {
+      background: #E8F0E8;
+      border-radius: 12px;
+      height: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .map-road-h {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .map-road-v {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .map-pin {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--orange);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      border: 2px solid #fff;
+    }
+
+    .map-label {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(26, 46, 74, 0.8);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .soc-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    .soc-btn:hover {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+    }
+
+    .toast-wrap {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      background: var(--navy);
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-top: 14px;
+    }
+
+    .toast-wrap.show {
+      display: flex;
+      animation: fadeUp 0.3s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .toast-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #639922;
+      flex-shrink: 0;
+    }
+
+    .toast-wrap span {
+      color: #fff;
+      font-size: 13px;
+    }
+
+    footer {
+      background: var(--navy);
+      padding: 48px 0 20px;
+    }
+
+    footer h5 {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    footer a {
+      display: block;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+      text-decoration: none;
+      margin-bottom: 7px;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .foot-divider {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 24px 0 16px;
+    }
+
+    .foot-copy {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <!---Navbar-->
+  <nav class="navbar-auto">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo">Auto</a>
+      <div class="d-flex gap-4 d-none d-md-flex">
+        <a href="../home_page/Home.html" class="nav-link-item">Home</a>
+        <a href="../service_page/Service.html" class="nav-link-item">Services</a>
+        <a href="../booking_page/Booking.html" class="nav-link-item">Booking</a>
+        <a href="../about_page/About.html" class="nav-link-item">About</a>
+        <a href="../contact_page/Contact.html" class="nav-link-item active">Contact</a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+         <div id="nav-auth"></div>
+        <a href="../sos_page/SOS.html" class="btn-sos-nav">SOS Help</a>
+        <button class="navbar-toggler-auto d-md-none"
+          onclick="toggleMenu()"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../home_page/Home.html">Home</a><a href="../service_page/Service.html">Services</a><a
+      href="../booking_page/Booking.html">Booking</a><a href="../about_page/About.html">About</a><a
+      href="../contact_page/Contact.html">Contact</a><a href="../sos_page/SOS.html" style="color:var(--orange);">SOS
+      Help</a>
+  </div>
+
+  <div class="page-header">
+    <div class="container">
+      <h1>Get in touch</h1>
+      <p>Have a question or feedback? We would love to hear from you.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-7 fade-up">
+          <div class="status-badge">
+            <div class="status-dot"></div><span>We're open · 24/7 support available</span>
+          </div>
+          <div class="panel-card">
+            <div class="section-tag">Send us a message</div>
+            <h2 class="panel-title">We'll get back to you within 24 hours</h2>
+            <p class="panel-sub">Fill in the form and our team will respond shortly.</p>
+            <div class="row g-3">
+              <div class="col-sm-6"><label class="form-label-auto">Your name</label><input type="text"
+                  class="form-control-auto" id="ct-name" placeholder="e.g. Meera Nair" />
+                <div class="error-message" id="name-error"></div>
+              </div>
+              <div class="col-sm-6"><label class="form-label-auto">Email address</label><input type="email"
+                  class="form-control-auto" id="ct-email" placeholder="e.g. meera@email.com" />
+                <div class="error-message" id="email-error"></div>
+              </div>
+              <div class="col-12"><label class="form-label-auto">Subject</label><input type="text"
+                  class="form-control-auto" id="ct-subject" placeholder="e.g. Question about booking" />
+                <div class="error-message" id="subject-error"></div>
+              </div>
+              <div class="col-12"><label class="form-label-auto">Message</label><textarea class="form-control-auto"
+                  id="ct-message" placeholder="Tell us how we can help..."></textarea>
+                <div class="error-message" id="message-error"></div>
+              </div>
+              <div class="col-12">
+                <button class="btn-send" onclick="sendMessage()">Send message</button>
+                <div class="toast-wrap" id="ct-toast">
+                  <div class="toast-dot"></div><span>Message sent! We'll get back to you within 24 hours.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5 fade-up">
+          <div class="section-tag" style="margin-bottom:10px;">Quick ways to reach us</div>
+          <div class="quick-actions">
+            <a href="tel:+919876543210" class="quick-btn">
+              <div class="quick-btn-icon" style="background:#FAECE7;"><svg width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="#993C1D" stroke-width="2" stroke-linecap="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 18a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 3.18 2 2 0 0 1 4.07 1h3a2 2 0 0 1 2 1.72c.127.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg></div>
+              <div><span>Call us directly</span><small>+91 98765 43210</small></div>
+            </a>
+            <a href="https://wa.me/919876543210" class="quick-btn" target="_blank">
+              <div class="quick-btn-icon" style="background:#E1F5EE;"><svg width="16" height="16" viewBox="0 0 24 24"
+                  fill="#25D366">
+                  <path
+                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+                  <path
+                    d="M12 0C5.373 0 0 5.373 0 12c0 2.083.53 4.04 1.458 5.745L0 24l6.395-1.432A11.953 11.953 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 0 1-5.006-1.369l-.36-.214-3.732.835.849-3.635-.234-.374A9.818 9.818 0 1 1 12 21.818z" />
+                </svg></div>
+              <div><span>WhatsApp us</span><small>Chat instantly</small></div>
+            </a>
+            <a href="mailto:hello@autoapp.in" class="quick-btn">
+              <div class="quick-btn-icon" style="background:#E6F1FB;"><svg width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="#185FA5" stroke-width="2" stroke-linecap="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg></div>
+              <div><span>Send an email</span><small>hello@autoapp.in</small></div>
+            </a>
+          </div>
+
+          <!-- INFO + MAP -->
+          <div class="info-card">
+            <h4>Contact details</h4>
+            <div class="info-row">
+              <div class="info-dot"></div><a href="tel:+919876543210">+91 98765 43210</a>
+            </div>
+            <div class="info-row">
+              <div class="info-dot"></div><a href="mailto:hello@autoapp.in">hello@autoapp.in</a>
+            </div>
+            <div class="info-row">
+              <div class="info-dot"></div><span>MG Road, Ernakulam,<br>Kochi — 682016, Kerala</span>
+            </div>
+            <div class="info-row">
+              <div class="info-dot"></div><span>Mon – Sun, open 24 hours</span>
+            </div>
+          </div>
+
+
+          <div class="map-box">
+            <div class="map-road-h" style="top:35%;"></div>
+            <div class="map-road-h" style="top:62%;"></div>
+            <div class="map-road-v" style="left:38%;"></div>
+            <div class="map-road-v" style="left:60%;"></div>
+            <div class="map-pin" style="top:24%;left:40%;"></div>
+            <div class="map-label">MG Road, Ernakulam, Kochi</div>
+          </div>
+
+          <p style="font-size:12px;color:var(--muted);margin-top:16px;margin-bottom:8px;">Follow us</p>
+          <div class="social-row">
+            <a href="#" class="soc-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg></a>
+            <a href="#" class="soc-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path
+                  d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.43.36a9 9 0 0 1-2.88 1.1A4.52 4.52 0 0 0 16.11 0c-2.5 0-4.52 2-4.52 4.46 0 .35.04.69.11 1.02A12.84 12.84 0 0 1 2.1.89a4.4 4.4 0 0 0-.61 2.24c0 1.55.79 2.91 2 3.71a4.5 4.5 0 0 1-2.05-.56v.06c0 2.16 1.54 3.97 3.58 4.38a4.56 4.56 0 0 1-2.04.08c.57 1.79 2.24 3.09 4.21 3.12A9.06 9.06 0 0 1 0 19.54a12.8 12.8 0 0 0 6.92 2.03c8.3 0 12.85-6.88 12.85-12.85 0-.2 0-.39-.01-.58A9.2 9.2 0 0 0 23 3z" />
+              </svg></a>
+            <a href="#" class="soc-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <h5>Auto</h5><a href="../home_page/Home.html">Home</a><a href="../service_page/Service.html">Services</a><a
+            href="../booking_page/Booking.html">Booking</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Help</h5><a href="../sos_page/SOS.html">SOS Emergency</a><a href="../contact_page/Contact.html">Contact
+            us</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Company</h5><a href="../about_page/About.html">About Auto</a><a
+            href="../privacy_page/Privacy.html">Privacy policy</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Follow us</h5><a href="../social_page/Social.html">Instagram</a><a
+            href="../social_page/Social.html">Twitter / X</a><a href="../social_page/Social.html">LinkedIn</a>
+        </div>
+      </div>
+      <div class="foot-divider"></div>
+      <p class="foot-copy">© 2026 Auto. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+// Authentication state management
+    function updateNavAuth() {
+  const loggedIn = localStorage.getItem('auto_logged_in');
+  const user = JSON.parse(localStorage.getItem('auto_user') || '{}');
+  const wrap = document.getElementById('nav-auth');
+  if (loggedIn && user.name) {
+    wrap.innerHTML = `<span style="color:rgba(255,255,255,0.85);font-size:13px;font-weight:500;">Hi, ${user.name.split(' ')[0]}</span>
+    <button onclick="logout()" style="background:none;border:none;color:rgba(255,255,255,0.5);font-size:12px;cursor:pointer;margin-left:8px;text-decoration:underline;">Logout</button>`;
+  } else {
+    wrap.innerHTML = `<a href="../login_page/login.html" style="background:transparent;color:#fff;font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);">Log in</a>`;
+  }
+}
+  
+function logout() {
+  localStorage.removeItem('auto_logged_in');
+  window.location.href = '../home_page/Home.html';
+}
+updateNavAuth();
+     function toggleMenu() {
+       document.getElementById('mobile-menu').classList.toggle('open'); 
+      }
+   
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { 
+        if (e.isIntersecting) e.target.classList.add('visible'); 
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Mobile menu toggle
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('open');
+    }
+
+    function sendMessage() {
+      // Clear all previous error messages
+      document.getElementById('name-error').textContent = '';
+      document.getElementById('name-error').classList.remove('show');
+      document.getElementById('email-error').textContent = '';
+      document.getElementById('email-error').classList.remove('show');
+      document.getElementById('subject-error').textContent = '';
+      document.getElementById('subject-error').classList.remove('show');
+      document.getElementById('message-error').textContent = '';
+      document.getElementById('message-error').classList.remove('show');
+
+      const name = document.getElementById('ct-name').value.trim();
+      const email = document.getElementById('ct-email').value.trim();
+      const subject = document.getElementById('ct-subject').value.trim();
+      const message = document.getElementById('ct-message').value.trim();
+
+      let hasError = false;
+
+      // Validate name: at least 3 characters
+      if (!name || name.length < 3) {
+        document.getElementById('name-error').textContent = 'Please enter your name with at least 3 characters.';
+        document.getElementById('name-error').classList.add('show');
+        hasError = true;
+      }
+
+      // Validate email: proper email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        document.getElementById('email-error').textContent = 'Please enter a valid email address.';
+        document.getElementById('email-error').classList.add('show');
+        hasError = true;
+      }
+
+      // Validate subject: at least 5 characters
+      if (!subject || subject.length < 5) {
+        document.getElementById('subject-error').textContent = 'Please enter a subject with at least 5 characters.';
+        document.getElementById('subject-error').classList.add('show');
+        hasError = true;
+      }
+
+      // Validate message: at least 10 characters and not just gibberish
+      if (!message || message.length < 10) {
+        document.getElementById('message-error').textContent = 'Please enter a message with at least 10 characters.';
+        document.getElementById('message-error').classList.add('show');
+        hasError = true;
+      }
+
+      // Optional: Check for inappropriate content (basic check for common bad words)
+      const badWords = ['stupid', 'idiot', 'dumb', 'nonsense']; // Add more as needed
+      const lowerMessage = message.toLowerCase();
+      for (let word of badWords) {
+        if (lowerMessage.includes(word)) {
+          document.getElementById('message-error').textContent = 'Please use appropriate language in your message.';
+          document.getElementById('message-error').classList.add('show');
+          hasError = true;
+          break;
+        }
+      }
+
+      if (hasError) {
+        return;
+      }
+
+      document.getElementById('ct-toast').classList.add('show');
+
+      document.getElementById('ct-name').value = '';
+      document.getElementById('ct-email').value = '';
+      document.getElementById('ct-subject').value = '';
+      document.getElementById('ct-message').value = '';
+      setTimeout(() => document.getElementById('ct-toast').classList.remove('show'), 5000);
+    }
+
+    const obs = new IntersectionObserver(e => e.forEach(x => { if (x.isIntersecting) x.target.classList.add('visible'); }), { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  </script>
+</body>
+
+</html>

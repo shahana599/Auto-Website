@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto — SOS Help</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Sora:wght@600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #1A2E4A;
+      --orange: #E55A2B;
+      --bg: #F5F6F8;
+      --white: #FFFFFF;
+      --border: #E4E6EA;
+      --text: #1A2E4A;
+      --muted: #6B7280;
+      --done: #E55A2B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .navbar-auto {
+      background: var(--navy);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .nav-link-item {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-link-item:hover {
+      color: #fff;
+    }
+
+    .btn-sos-nav {
+      background: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .navbar-toggler-auto {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+      padding: 5px 8px;
+      cursor: pointer;
+    }
+
+    .navbar-toggler-auto span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: #fff;
+      margin: 3px 0;
+      border-radius: 2px;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: #162438;
+      padding: 12px 0;
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14px;
+      padding: 10px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      text-decoration: none;
+    }
+
+    .sos-hero {
+      background: var(--navy);
+      padding: 56px 0 48px;
+      text-align: center;
+    }
+
+    .sos-hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .sos-hero p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 15px;
+      margin-bottom: 36px;
+    }
+
+    .pulse-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 2px solid rgba(229, 90, 43, 0.4);
+      animation: pulse 2s ease-out infinite;
+    }
+
+    .pulse-ring-2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 2px solid rgba(229, 90, 43, 0.2);
+      animation: pulse 2s ease-out infinite 0.4s;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: translate(-50%, -50%) scale(0.9);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1.3);
+        opacity: 0;
+      }
+    }
+
+    .sos-btn-wrap {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .sos-main-btn {
+      position: relative;
+      z-index: 2;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--orange);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: transform 0.15s;
+      margin: 40px auto;
+    }
+
+    .sos-main-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .sos-main-btn span {
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .section {
+      padding: 48px 0;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .panel-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .panel-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .panel-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .etype-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .etype-card {
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transition: all 0.2s;
+      background: var(--white);
+    }
+
+    .etype-card:hover {
+      border-color: #b5c4d8;
+    }
+
+    .etype-card.selected {
+      border-color: var(--orange);
+      background: rgba(229, 90, 43, 0.04);
+    }
+
+    .etype-icon {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+    }
+
+    .etype-icon img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .etype-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    .etype-card p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .etype-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      margin-left: auto;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .etype-card.selected .etype-check {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .etype-card.selected .etype-check::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .form-label-auto {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .form-control-auto {
+      width: 100%;
+      height: 44px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0 14px;
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    .form-control-auto:focus {
+      border-color: var(--navy);
+    }
+
+    .form-control-auto::placeholder {
+      color: #b0b5bc;
+    }
+
+    .error {
+      font-size: 12px;
+      color: #dc3545;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .error.show {
+      display: block;
+    }
+
+    .form-control-auto.invalid {
+      border-color: #dc3545;
+    }
+
+    .map-box {
+      background: #E8F0E8;
+      border-radius: 10px;
+      height: 100px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .map-road-h {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .map-road-v {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    .map-pin {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--orange);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      border: 2px solid #fff;
+    }
+
+    .btn-sos-submit {
+      background: var(--orange);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s;
+    }
+
+    .btn-sos-submit:hover {
+      background: #cc4e22;
+    }
+
+    .timeline {
+      margin-top: 4px;
+    }
+
+    .tl-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .tl-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .tl-dot.done {
+      background: rgba(99, 153, 34, 0.15);
+    }
+
+    .tl-dot.active {
+      background: rgba(26, 46, 74, 0.12);
+    }
+
+    .tl-dot.pending {
+      background: var(--border);
+    }
+
+    .tl-content h5 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    .tl-content p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .tl-line {
+      width: 2px;
+      height: 16px;
+      background: var(--border);
+      margin-left: 13px;
+    }
+
+    .reassure-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .reassure-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .reassure-card strong {
+      display: block;
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .reassure-card span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .sos-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      animation: fadeUp 0.4s ease;
+    }
+
+    .sos-success.show {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    footer {
+      background: var(--navy);
+      padding: 48px 0 20px;
+    }
+
+    footer h5 {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    footer a {
+      display: block;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+      text-decoration: none;
+      margin-bottom: 7px;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .foot-divider {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 24px 0 16px;
+    }
+
+    .foot-copy {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+    }
+
+    @media(max-width:576px) {
+      .etype-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .reassure-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!---Navbar-->
+  <nav class="navbar-auto">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo">Auto</a>
+      <div class="d-flex gap-4 d-none d-md-flex">
+        <a href="../home_page/Home.html" class="nav-link-item">Home</a>
+        <a href="../service_page/Service.html" class="nav-link-item">Services</a>
+        <a href="../booking_page/Booking.html" class="nav-link-item">Booking</a>
+        <a href="../about_page/About.html" class="nav-link-item">About</a>
+        <a href="../contact_page/Contact.html" class="nav-link-item">Contact</a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+         <div id="nav-auth"></div>
+        <a href="sos.html" class="btn-sos-nav">SOS Help</a>
+        <button class="navbar-toggler-auto d-md-none"
+          onclick="toggleMenu()"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="../home_page/Home.html">Home</a><a href="../service_page/Service.html">Services</a><a
+      href="../booking_page/Booking.html">Booking</a><a href="../about_page/About.html">About</a><a
+      href="../contact_page/Contact.html">Contact</a><a href="../sos_page/SOS.html" style="color:var(--orange);">SOS
+      Help</a>
+  </div>
+
+  <!--Big bold hero-->
+  <div class="sos-hero">
+    <h1>Need help right now?</h1>
+    <p>Call us immediately — our team will reach you in under 15 minutes.</p>
+    <div class="sos-btn-wrap">
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring-2"></div>
+      <button class="sos-main-btn" onclick="window.location.href='tel:+919876543210'">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path
+            d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.19 18a19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 3.18 2 2 0 0 1 4.07 1h3a2 2 0 0 1 2 1.72c.127.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+        </svg>
+        <span>CALL SOS</span>
+      </button>
+    </div>
+    <p style="color:rgba(255,255,255,0.4);font-size:12px;margin-top:-20px;">Tap to call +91 98765 43210</p>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="row justify-content-center g-4">
+        <div class="col-lg-7">
+
+          <!-- SUCCESS STATE -->
+          <div class="sos-success" id="sos-success">
+            <div class="panel-card">
+              <div class="success-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#639922" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <h3 style="font-family:'Sora',sans-serif;font-size:20px;color:var(--navy);margin-bottom:8px;">SOS request
+                sent!</h3>
+              <p style="color:var(--muted);font-size:14px;margin-bottom:24px;text-align:center;">Our team has received
+                your request and is on the way.</p>
+              <div class="timeline">
+                <div class="tl-item">
+                  <div class="tl-dot done"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#639922"
+                      stroke-width="2.5" stroke-linecap="round">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg></div>
+                  <div class="tl-content">
+                    <h5>Request received</h5>
+                    <p>We got your SOS request successfully</p>
+                  </div>
+                </div>
+                <div class="tl-line"></div>
+                <div class="tl-item">
+                  <div class="tl-dot active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                      stroke="#1A2E4A" stroke-width="2.5" stroke-linecap="round">
+                      <circle cx="12" cy="12" r="3" />
+                      <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12" />
+                    </svg></div>
+                  <div class="tl-content">
+                    <h5>Team being assigned</h5>
+                    <p>Usually takes 1–2 minutes</p>
+                  </div>
+                </div>
+                <div class="tl-line"></div>
+                <div class="tl-item">
+                  <div class="tl-dot pending"></div>
+                  <div class="tl-content">
+                    <h5 style="color:var(--muted);">En route to your location</h5>
+                    <p>Expected arrival under 15 minutes</p>
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:20px;text-align:center;"><a href="../home_page/Home.html"
+                  style="color:var(--orange);font-weight:600;font-size:14px;text-decoration:none;">← Back to Home</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- EMERGENCY TYPE -->
+          <div id="sos-form-section">
+            <div class="panel-card mb-4">
+              <div class="section-tag">What kind of help do you need?</div>
+              <h2 class="panel-title">Select emergency type</h2>
+              <p class="panel-sub">This helps us send the right team faster.</p>
+              <div class="etype-grid">
+                <div class="etype-card" onclick="selectType(this,'Breakdown')">
+                  <div class="etype-icon"><img src="sos-breakdown.png" alt="Breakdown" /></div>
+                  <div>
+                    <h4>Breakdown</h4>
+                    <p>Vehicle stopped working</p>
+                  </div>
+                  <div class="etype-check"></div>
+                </div>
+                <div class="etype-card" onclick="selectType(this,'Accident')">
+                  <div class="etype-icon"><img src="sos-accident.png" alt="Accident" /></div>
+                  <div>
+                    <h4>Accident</h4>
+                    <p>Vehicle in accident</p>
+                  </div>
+                  <div class="etype-check"></div>
+                </div>
+                <div class="etype-card" onclick="selectType(this,'Flat tyre')">
+                  <div class="etype-icon"><img src="sos-flattyre.png" alt="Flat tyre" /></div>
+                  <div>
+                    <h4>Flat tyre</h4>
+                    <p>Tyre puncture or burst</p>
+                  </div>
+                  <div class="etype-check"></div>
+                </div>
+                <div class="etype-card" onclick="selectType(this,'Out of fuel')">
+                  <div class="etype-icon"><img src="sos-outoffuel.png" alt="Out of fuel" /></div>
+                  <div>
+                    <h4>Out of fuel</h4>
+                    <p>Vehicle ran out of fuel</p>
+                  </div>
+                  <div class="etype-check"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- QUICK FORM -->
+            <div class="panel-card mb-4">
+              <div class="section-tag">Quick details</div>
+              <h2 class="panel-title">Where are you?</h2>
+              <p class="panel-sub">Just your name and location — we'll handle the rest.</p>
+              <div class="map-box">
+                <div class="map-road-h" style="top:35%;"></div>
+                <div class="map-road-h" style="top:65%;"></div>
+                <div class="map-road-v" style="left:38%;"></div>
+                <div class="map-road-v" style="left:62%;"></div>
+                <div class="map-pin" style="top:26%;left:40%;"></div>
+              </div>
+              <div class="mb-3"><label class="form-label-auto">Your name</label><input type="text" class="form-control-auto" id="sos-name" placeholder="e.g. Sneha Rajan" />
+              <div class="error" id="nameError"></div></div>
+              <div class="mb-3"><label class="form-label-auto">Your current location</label><input type="text"
+                  class="form-control-auto" id="sos-location" placeholder="e.g. Near Vytilla junction, Kochi" />
+                <div class="error" id="addressError"></div></div>
+              <button class="btn-sos-submit" onclick="sendSOS()">Send SOS request</button>
+            </div>
+          </div>
+
+          <!-- REASSURE -->
+          <div class="reassure-grid">
+            <div class="reassure-card"><strong>12 min</strong><span>Average response</span></div>
+            <div class="reassure-card"><strong>24/7</strong><span>Always available</span></div>
+            <div class="reassure-card"><strong>10k+</strong><span>People helped</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Footer-->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <h5>Auto</h5><a href="../home_page/Home.html">Home</a><a href="../services_page/Services.html">Services</a><a
+            href="../booking_page/Booking.html">Booking</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Help</h5><a href="./SOS.html">SOS Emergency</a><a href="../contact_page/Contact.html">Contact us</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Company</h5><a href="../about_page/About.html">About Auto</a><a href="#">Privacy policy</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Follow us</h5><a href="#">Instagram</a><a href="#">Twitter / X</a>
+        </div>
+      </div>
+      <div class="foot-divider"></div>
+      <p class="foot-copy">© 2026 Auto. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+  <script>
+    //navbar auth
+    function updateNavAuth() {
+  const loggedIn = localStorage.getItem('auto_logged_in');
+  const user = JSON.parse(localStorage.getItem('auto_user') || '{}');
+  const wrap = document.getElementById('nav-auth');
+  if (loggedIn && user.name) {
+    wrap.innerHTML = `<span style="color:rgba(255,255,255,0.85);font-size:13px;font-weight:500;">Hi, ${user.name.split(' ')[0]}</span>
+    <button onclick="logout()" style="background:none;border:none;color:rgba(255,255,255,0.5);font-size:12px;cursor:pointer;margin-left:8px;text-decoration:underline;">Logout</button>`;
+  } else {
+    wrap.innerHTML = `<a href="../login_page/login.html" style="background:transparent;color:#fff;font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);">Log in</a>`;
+  }
+}
+  
+function logout() {
+  localStorage.removeItem('auto_logged_in');
+  window.location.href = '../home_page/Home.html';
+}
+updateNavAuth();
+     function toggleMenu() {
+       document.getElementById('mobile-menu').classList.toggle('open'); 
+      }
+
+    // Mobile menu toggle and SOS form handling
+    let selectedType = '';
+    function toggleMenu() { 
+      document.getElementById('mobile-menu').classList.toggle('open'); 
+    }
+    function selectType(card, type) { 
+      document.querySelectorAll('.etype-card').forEach(c => c.classList.remove('selected')); 
+      card.classList.add('selected'); 
+      selectedType = type; 
+    }
+    function sendSOS() {
+      const name = document.getElementById('sos-name').value.trim();
+      const loc = document.getElementById('sos-location').value.trim();
+
+      // Clear previous errors
+      document.getElementById('nameError').textContent = '';
+      document.getElementById('nameError').classList.remove('show');
+      document.getElementById('addressError').textContent = '';
+      document.getElementById('addressError').classList.remove('show');
+      document.getElementById('sos-name').classList.remove('invalid');
+      document.getElementById('sos-location').classList.remove('invalid');
+
+      let hasError = false;
+      if (!name || name.length < 3) {
+        const el = document.getElementById('nameError');
+        el.textContent = 'Please enter your name with at least 3 characters.';
+        el.classList.add('show');
+        document.getElementById('sos-name').classList.add('invalid');
+        hasError = true;
+      }
+      if (!loc || loc.length < 8) {
+        const el = document.getElementById('addressError');
+        el.textContent = 'Please enter your full address or location.';
+        el.classList.add('show');
+        document.getElementById('sos-location').classList.add('invalid');
+        hasError = true;
+      }
+      if (!selectedType) {
+        alert('Please select an emergency type.');
+        hasError = true;
+      }
+      if (hasError) return;
+
+      document.getElementById('sos-form-section').style.display = 'none';
+      document.getElementById('sos-success').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+
+</html>
