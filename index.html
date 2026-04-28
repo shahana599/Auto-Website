@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Auto — Home</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Sora:wght@600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #1A2E4A;
+      --orange: #E55A2B;
+      --bg: #F5F6F8;
+      --white: #FFFFFF;
+      --border: #E4E6EA;
+      --text: #1A2E4A;
+      --muted: #6B7280;
+      --done: #E55A2B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    /*  NAVBAR  */
+    .navbar-auto {
+      background: var(--navy);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar-auto .logo {
+      font-family: 'Sora', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+
+    .navbar-auto .nav-link-item {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .navbar-auto .nav-link-item:hover {
+      color: #fff;
+    }
+
+    .navbar-auto .nav-link-item.active {
+      color: #fff;
+    }
+
+    .btn-sos-nav {
+      background: var(--orange);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: none;
+      transition: background 0.2s;
+    }
+
+    .btn-sos-nav:hover {
+      background: #cc4e22;
+      color: #fff;
+    }
+
+    .navbar-toggler-auto {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+      padding: 5px 8px;
+      cursor: pointer;
+    }
+
+    .navbar-toggler-auto span {
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: #fff;
+      margin: 3px 0;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .mobile-menu {
+      display: none;
+      background: #162438;
+      padding: 12px 0;
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .mobile-menu a:hover {
+      color: #fff;
+    }
+
+    /*  HERO  */
+    .hero {
+      background: var(--navy);
+      padding: 72px 0 64px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(229, 90, 43, 0.15);
+      border: 1px solid rgba(229, 90, 43, 0.35);
+      border-radius: 99px;
+      padding: 5px 14px;
+      margin-bottom: 20px;
+    }
+
+    .hero-badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--orange);
+    }
+
+    .hero-badge span {
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      max-width: 480px;
+    }
+
+    .btn-primary-auto {
+      background: var(--orange);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.1s;
+      display: inline-block;
+    }
+
+    .btn-primary-auto:hover {
+      background: #cc4e22;
+      color: #fff;
+    }
+
+    .btn-secondary-auto {
+      background: transparent;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-secondary-auto:hover {
+      border-color: #fff;
+      color: #fff;
+    }
+
+    .hero-phone-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Glow behind the phone */
+    .hero-phone-wrap::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(229, 90, 43, 0.18) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .hero-phone-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 280px;
+      animation: phoneFloat 4s ease-in-out infinite;
+      filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.4));
+    }
+
+    /* Gentle floating animation */
+    @keyframes phoneFloat {
+
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    /* Hide on small screens so it doesn't squish */
+    @media (max-width: 768px) {
+      .hero-phone-wrap {
+        display: none;
+      }
+    }
+    /* features*/
+    .section {
+      padding: 64px 0;
+    }
+
+    .section-tag {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+
+    .feat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      height: 100%;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .feat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(26, 46, 74, 0.08);
+    }
+
+    .feat-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .feat-icon img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+
+    .feat-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .feat-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+
+    .price-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(229, 90, 43, 0.09);
+      border: 0.5px solid rgba(229, 90, 43, 0.3);
+      border-radius: 5px;
+      padding: 3px 9px;
+    }
+
+    .price-badge span {
+      font-size: 12px;
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .popular-tag {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 99px;
+    }
+
+    /* how it works */
+    .how-bg {
+      background: var(--navy);
+      padding: 64px 0;
+    }
+
+    .how-bg .section-title {
+      color: #fff;
+    }
+
+    .how-bg .section-sub {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    .step-num-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+
+    .step-num-wrap img {
+      width: 72px;
+      height: 72px;
+    }
+
+    .step-connector {
+      position: absolute;
+      top: 36px;
+      left: 100%;
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .step-card h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .step-card p {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.6;
+    }
+
+    /* testimonials*/
+    .testi-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      height: 100%;
+      transition: transform 0.2s;
+    }
+
+    .testi-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+
+    .star {
+      width: 16px;
+      height: 16px;
+      background: var(--orange);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .testi-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .avatar img {
+      width: 38px;
+      height: 38px;
+      object-fit: cover;
+    }
+
+    .author-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .author-loc {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* CTA BANNER */
+    .cta-section {
+      background: var(--orange);
+      padding: 56px 0;
+    }
+
+    .cta-section h2 {
+      font-family: 'Sora', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .cta-section p {
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 15px;
+      margin-bottom: 28px;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--orange);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+
+    .btn-white:hover {
+      opacity: 0.9;
+      color: var(--orange);
+    }
+
+    /* footer */
+    footer {
+      background: var(--navy);
+      padding: 48px 0 20px;
+    }
+
+    footer h5 {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    footer a {
+      display: block;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 13px;
+      text-decoration: none;
+      margin-bottom: 7px;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .foot-divider {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin: 24px 0 16px;
+    }
+
+    .foot-copy {
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+    }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    @media(max-width:768px) {
+      .hero h1 {
+        font-size: 28px;
+      }
+
+      .hero-img-wrap {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!---Navbar-->
+  <nav class="navbar-auto">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo">Auto</a>
+      <div class="d-flex gap-4 d-none d-md-flex">
+        <a href="../home_page/Home.html" class="nav-link-item active">Home</a>
+        <a href="../service_page/Service.html" class="nav-link-item">Services</a>
+        <a href="../booking_page/Booking.html" class="nav-link-item">Booking</a>
+        <a href="../about_page/About.html" class="nav-link-item">About</a>
+        <a href="../contact_page/Contact.html" class="nav-link-item">Contact</a>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <div id="nav-auth"></div>
+      <a href="../sos_page/SOS.html" class="btn-sos-nav">SOS Help</a>
+      <button class="navbar-toggler-auto d-md-none" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+   <div class="mobile-menu" id="mobile-menu">
+    <a href="../home_page/Home.html">Home</a>
+    <a href="../service_page/Service.html">Services</a>
+    <a href="../booking_page/Booking.html">Booking</a>
+    <a href="../about_page/About.html">About</a>
+    <a href="../contact_page/Contact.html">Contact</a>
+    <a href="../sos_page/SOS.html" style="color:var(--orange);">SOS Help</a>
+  </div>
+
+  <!--Hero-->
+  <section class="hero">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+          <div class="hero-badge">
+            <div class="dot"></div><span>Available 24/7 across Kerala</span>
+          </div>
+          <h1>Your vehicle,<br><em>our responsibility</em></h1>
+          <p>Book a mechanic, car wash, towing and more — or get emergency roadside help whenever you need it.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="../booking_page/Booking.html" class="btn-primary-auto">Book a service</a>
+            <a href="../sos_page/SOS.html" class="btn-secondary-auto">Get SOS help</a>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-img-wrap d-flex justify-content-center">
+          <div class="hero-phone-wrap">
+            <img src="hero-phone.png" alt="Auto app" class="hero-phone-img" />
+          </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!--Features Strip-->
+  <section class="section">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-tag">What we offer</div>
+        <h2 class="section-title">Everything your vehicle needs</h2>
+        <p class="section-sub" style="max-width:480px;margin:0 auto;">One platform for all vehicle services and emergency help — fast, reliable, and at your doorstep.</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4 fade-up">
+          <div class="feat-card">
+            <span class="popular-tag">Popular</span>
+            <div class="feat-icon"><img src="./icon-mechanic.png" alt="Service"/></div>
+            <h3>Vehicle services</h3>
+            <p>Mechanic, car wash, tyre change, towing and more — all booked in minutes.</p>
+            <div class="price-badge"><span>From ₹149</span></div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 fade-up">
+          <div class="feat-card">
+            <div class="feat-icon"><img src="./icon-booking.png" alt="Booking" /></div>
+            <h3>Easy booking</h3>
+            <p>Pick a service, choose your time slot, enter your location. We handle the rest.</p>
+            <div class="price-badge"><span>From ₹299</span></div>
+          </div>
+        </div>
+        <div class="col-md-4 fade-up">
+          <div class="feat-card">
+            <div class="feat-icon"><img src="./icon-sos.png" alt="SOS" /></div>
+            <h3>SOS emergency</h3>
+            <p>One tap to call for immediate help. We respond in under 15 minutes, 24/7.</p>
+            <div class="price-badge"><span>Free to request</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!--How it's works-->
+  <section class="how-bg">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-tag" style="color:rgba(229,90,43,0.9);">Simple steps</div>
+        <h2 class="section-title">How it works</h2>
+        <p class="section-sub">Get help in three simple steps — no calls, no hassle.</p>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4 fade-up">
+          <div class="step-card">
+            <div class="step-num-wrap"><img src="./step-1-pick.png" alt="Step 1" /></div>
+            <h4>Pick a service</h4>
+            <p>Choose from our list of vehicle services — mechanic, wash, towing and more.</p>
+          </div>
+        </div>
+        <div class="col-md-4 fade-up">
+          <div class="step-card">
+            <div class="step-num-wrap"><img src="./step-2-book.png" alt="Step 2" /></div>
+            <h4>Book a slot</h4>
+            <p>Select your preferred date, time, and enter your current location.</p>
+          </div>
+        </div>
+        <div class="col-md-4 fade-up">
+          <div class="step-card">
+            <div class="step-num-wrap"><img src="./step-3-arrive.png" alt="Step 3" /></div>
+            <h4>We come to you</h4>
+            <p>Our verified team arrives at your location right on time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--Testimonials-->
+  <section class="section" style="background:var(--white);">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="section-tag">What people say</div>
+        <h2 class="section-title">Trusted by thousands</h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 fade-up">
+          <div class="testi-card">
+            <div class="stars">
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+            </div>
+            <p>"Got a flat tyre on NH66 at night. Auto sent someone in 12 minutes. Genuinely saved my trip."</p>
+            <div class="testi-author">
+              <div class="avatar"><img src="./avatar-arjun.png" alt="Arjun K." /></div>
+              <div>
+                <div class="author-name">Arjun K.</div>
+                <div class="author-loc">Kochi, Kerala</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 fade-up">
+          <div class="testi-card">
+            <div class="stars">
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+              <div class="star"></div>
+            </div>
+            <p>"Booked a car wash for Sunday morning through the website. Super smooth, showed up on time."</p>
+            <div class="testi-author">
+              <div class="avatar"><img src="./avatar-priya.png" alt="Priya M." /></div>
+              <div>
+                <div class="author-name">Priya M.</div>
+                <div class="author-loc">Thrissur, Kerala</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA -->
+
+  <section class="cta-section text-center">
+    <div class="container">
+      <h2>Ready to get started?</h2>
+      <p>Book a service in under 2 minutes or get SOS help right now.</p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="../booking_page/Booking.html" class="btn-white">Book a service</a>
+        <a href="../sos_page/SOS.html" class="btn-secondary-auto" style="border-color:rgba(255,255,255,0.5);">Get SOS
+          help</a>
+      </div>
+    </div>
+  </section>
+
+  <!--Footer-->
+  <footer>
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-6 col-md-3">
+          <h5>Auto</h5><a href="../home_page/Home.html">Home</a><a href="../services_page/Services.html">Services</a><a
+            href="../booking_page/Booking.html">Booking</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Help</h5><a href="../sos_page/SOS.html">SOS Emergency</a><a href="../contact_page/Contact.html">Contact
+            us</a><a href="#">FAQs</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Company</h5><a href="../about_page/About.html">About Auto</a><a href="#">Privacy policy</a><a
+            href="#">Terms</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5>Follow us</h5><a href="#">Instagram</a><a href="#">Twitter / X</a><a href="#">LinkedIn</a>
+        </div>
+      </div>
+      <div class="foot-divider"></div>
+      <p class="foot-copy">© 2026 Auto. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function updateNavAuth() {
+  const loggedIn = localStorage.getItem('auto_logged_in');
+  const user = JSON.parse(localStorage.getItem('auto_user') || '{}');
+  const wrap = document.getElementById('nav-auth');
+  if (loggedIn && user.name) {
+    wrap.innerHTML = `<span style="color:rgba(255,255,255,0.85);font-size:13px;font-weight:500;">Hi, ${user.name.split(' ')[0]}</span>
+    <button onclick="logout()" style="background:none;border:none;color:rgba(255,255,255,0.5);font-size:12px;cursor:pointer;margin-left:8px;text-decoration:underline;">Logout</button>`;
+  } else {
+    wrap.innerHTML = `<a href="../login_page/login.html" style="background:transparent;color:#fff;font-size:13px;font-weight:500;padding:7px 16px;border-radius:6px;text-decoration:none;border:1px solid rgba(255,255,255,0.3);">Log in</a>`;
+  }
+}
+
+function logout() {
+  localStorage.removeItem('auto_logged_in');
+  window.location.href = '../home_page/Home.html';
+}
+updateNavAuth();
+     function toggleMenu() {
+       document.getElementById('mobile-menu').classList.toggle('open'); 
+      }
+   
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { 
+        if (e.isIntersecting) e.target.classList.add('visible'); 
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  </script>
+
+</body>
+
+</html>
